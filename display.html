@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of users</title>
+
+    <style>
+
+        table{
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td{
+            border: 1px solid rgb(247, 141, 3);
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+
+
+</head>
+<body>
+    <center><h1 style="color: crimson;width: 5px;">User Details</h1></center>
+    <table>
+        <thead>
+            <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody id="tablebody"></tbody>>
+    </table>
+    <script>
+        let users=JSON.parse(localStorage.getItem("users"))||[];
+        let tablebody=document.getElementById("tablebody");
+
+        users.forEach(function(user){
+            let row=`<tr><td>${user.name}</td><td>${user.email}</td><td>${user.number}</td></tr>`;
+            tablebody.innerHTML+=row;
+        });
+    </script>
+    
+</body>
+</html>

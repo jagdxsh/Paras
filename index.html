@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>AJAX Example</title>
+</head>
+<body style="background-color: rgb(236, 236, 184);">
+    <center>
+    <form id="registerform">
+        <input type="text" id="name" placeholder="Enter the name" required><br>
+        <input type="email" id="email" placeholder="Enter the email" required><br>
+        <input type="number" id="number" placeholder="Enter the number" required><br><br>
+        <button id="submit" style="background-color: crimson;color: azure;border-radius: 10px;height: 30px;width: 80px;;">Register</button><br>
+    </form></center>
+
+    <script>
+        document.getElementById("registerform").addEventListener("submit",function(event){
+           event.preventDefault();
+           
+           let name=document.getElementById("name").value;
+           let email=document.getElementById("email").value;
+           let number=document.getElementById("number").value;
+
+            users_data={
+                name:name,
+                email:email,
+                number:number,
+            };
+
+            let users=JSON.parse(localStorage.getItem("users"))|| [];
+
+            users.push(users_data);
+
+            localStorage.setItem("users",JSON.stringify(users));
+
+            let xhr=new XMLHttpRequest();
+            
+            xhr.open("POST","https://jsonplaceholder.typicode.com/posts",true);
+            xhr.setRequestHeader("Content-Type","application/json");
+
+            xhr.onload=(function () {
+                if(xhr.status==201){
+                    alert("Registeration done !");
+
+                    window.location.href="display.html";
+                }
+            });
+            xhr.send(JSON.stringify(users_data));
+
+
+        });
+    </script>
+    
+</body>
+</html>
